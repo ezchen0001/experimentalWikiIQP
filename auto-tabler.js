@@ -153,4 +153,5 @@ window.onload = function(){
   var table = createTableElement(gameName)
   document.getElementById("gameInfo").append(table)
 }
+console.log("script loaded")
 </script>
