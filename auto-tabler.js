@@ -1,4 +1,3 @@
-<script>
 // Game to tag auto-tabler
 // by Ethan Chen
 
@@ -154,4 +153,3 @@ window.onload = function(){
   document.getElementById("gameInfo").append(table)
 }
 console.log("cdn script loaded")
-</script>
