@@ -1,14 +1,18 @@
-// Game to tag auto-tabler
+// This script automatically generates Super Mario Bros. 3's table of tags and examples
 // by Ethan Chen
 
-// To apply the table, <figure class="table" id="gameInfo"></figure> should be located somewhere in the html5 markup
+// To apply the table, the below should be located somewhere in the html5 markup:
+// <figure class="table" id="gameInfo" data-game="<name of game here>"></figure>
   
-// The following are sources whose code I referenced from:  
+// The following are sources I referenced from:  
 //https://stackoverflow.com/questions/16485255/how-do-you-import-data-from-a-google-sheets
 //https://stackoverflow.com/questions/70902197/accessing-a-public-google-sheets-data-directly-from-client-side-javascript
 //https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data
 //https://www.w3schools.com/howto/howto_js_sort_table.asp
 
+// Regarding sheet rate limits:
+// https://stackoverflow.com/questions/70349368/what-is-the-limitation-of-google-published-csv
+  
 function sortTable(table ) {
   var rows, switching, i, x, y, shouldSwitch;
   switching = true;
@@ -147,9 +151,8 @@ window.onload = function(){
   var id = '1OLx9vr4pR6PtT63MAPaU0qvf5N2WclZ5I1y3ifjkQig';
   var gid = '0';
   var url = 'https://docs.google.com/spreadsheets/d/'+id+'/gviz/tq?tqx=out:json&tq&gid='+gid;
-  arrRangeCallback("B",console.log)
-  var gameName = "Super Mario Bros. 3"
+  var figure = document.getElementById("gameInfo")
+  var gameName = figure.dataset.game//"Super Mario Bros. 3"
   var table = createTableElement(gameName)
-  document.getElementById("gameInfo").append(table)
+  figure.append(table)
 }
-console.log("cdn script loaded")
