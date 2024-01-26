@@ -144,7 +144,7 @@ function createTableElement(gameName){
 }
 
 // window.onload must be set to wait until all elements are loaded, otherwise element retrieval methods return null
-function onload(){
+window.onload = function(){
   var id = '1OLx9vr4pR6PtT63MAPaU0qvf5N2WclZ5I1y3ifjkQig';
   var gid = '0';
   var url = 'https://docs.google.com/spreadsheets/d/'+id+'/gviz/tq?tqx=out:json&tq&gid='+gid;
