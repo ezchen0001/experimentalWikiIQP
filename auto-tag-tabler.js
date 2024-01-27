@@ -150,7 +150,7 @@ function createTableElement(gameName){
     	tdUse.innerHTML = example
       //Create link for tag
      	let a = document.createElement("a")
-      a.setAttribute('href', '/list-of-video-games/' + name.replace(/\W/g, '-'));
+      a.setAttribute('href', '/list-of-video-games/' + name.replace(/[^a-z0-9()]/gmi, " ").replace(/\s+/g, "-"));
       a.innerHTML = name
       tdGame.append(a)
     	tbody.append(tr)
