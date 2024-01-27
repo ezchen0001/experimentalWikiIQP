@@ -156,7 +156,7 @@ function createTableElement(gameName){
     	tbody.append(tr)
     }
     //sort table alphabetically
-    //sortTable(table)
+    sortTable(table)
   }
   
   // 2 stage callback chain to get array data from the tag list
