@@ -91,7 +91,7 @@ function splitQueryCSV(str){
 //Returns a dictionary where key is from column A, and value is from column str, and the value isn't null
 function arrQueryCallback(str, callback){
   var range = 'A5:'+str;
-  var tq = 'SELECT A,B WHERE B IS NOT NULL'
+  var tq = 'SELECT A,'+str+' WHERE '+str+' IS NOT NULL'
   var url = 'https://docs.google.com/spreadsheets/d/'+id+'/gviz/tq?tqx=out:csv&keep-empty=true&range='+range+'&gid='+gid+'&tq='+tq;
   xmlhttp = new XMLHttpRequest();
           xmlhttp.onreadystatechange = function () {
