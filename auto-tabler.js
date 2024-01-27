@@ -1,4 +1,4 @@
-// This script automatically generates Super Mario Bros. 3's table of tags and examples
+// This script automatically generates a game's table of tags and examples
 // by Ethan Chen
 
 // To apply the table, the below should be located somewhere in the html5 markup:
