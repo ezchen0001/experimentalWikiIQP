@@ -18,7 +18,7 @@
  var id = '1OLx9vr4pR6PtT63MAPaU0qvf5N2WclZ5I1y3ifjkQig';
   var gid = '0';
   
-  
+// sorts a table alphabetically
 function sortTable(table ) {
   var rows, switching, i, x, y, shouldSwitch;
   switching = true;
