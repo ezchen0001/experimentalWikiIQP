@@ -120,6 +120,7 @@ function createTableElement(gameName){
   var table = document.createElement("table")
   var tbody = document.createElement("tbody")
   table.append(tbody)
+  var headerTag
   //First row headers
   {
   	let tr = document.createElement("tr") 
@@ -131,9 +132,10 @@ function createTableElement(gameName){
     tdGame.append(h1Game)
     tr.append(tdUse)
     tdUse.append(h1Use)
-    h1Game.innerHTML = "Game"
+    h1Game.innerHTML = "Game (Loading...)"
     h1Use.innerHTML = "Use In Game"
     tbody.append(tr)
+    headerTag = h1Game
   }
   var tagColumn = ""
  	var gameDict = []
@@ -157,6 +159,8 @@ function createTableElement(gameName){
     }
     //sort table alphabetically
     sortTable(table)
+    //header tag
+    headerTag.innerHTML = "Game"
   }
   
   // 2 stage callback chain to get array data from the tag list
