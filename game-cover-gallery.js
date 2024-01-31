@@ -88,7 +88,7 @@ a.coverItem:hover span.coverItem {
       
     	var a = document.createElement("a")
       a.classList.add("coverItem")
-      a.href = '/list-of-video-games/'+gameName.replace(/[^a-z0-9()]/gmi, " ").replace(/\s+/g, "-")
+      a.href = '/list-of-video-games/'+gameName.replace(/[^a-z0-9()']/gmi, " ").replace(/\s+/g, "-")
     	var vertDiv = document.createElement("div")
       vertDiv.classList.add("vertDiv")
     	
