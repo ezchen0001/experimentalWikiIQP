@@ -115,7 +115,7 @@ function createTableElement(gameName){
     	tdUse.innerHTML = example
     	if(Number(tagExCount[i]) > 1){ // if tag is not niche, create the link for it
       	let a = document.createElement("a")
-        a.setAttribute('href', '/tags-and-definitions/' + name.replace(/[^a-z0-9()]/gmi, " ").replace(/\s+/g, "-"));
+        a.setAttribute('href', '/tags-and-definitions/' + name.replace(/[^a-z0-9()']/gmi, " ").replace(/\s+/g, "-"));
         a.innerHTML = name
         tdTag.append(a)
       }else{
