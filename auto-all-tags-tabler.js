@@ -115,7 +115,7 @@ function createTableElement(){
     	tdUse.innerHTML = example
       
       let a = document.createElement("a")
-      a.setAttribute('href', '/tags-and-definitions/' + name.replace(/[^a-z0-9()]/gmi, " ").replace(/\s+/g, "-"));
+      a.setAttribute('href', '/tags-and-definitions/' + name.replace(/[^a-z0-9()']/gmi, " ").replace(/\s+/g, "-"));
       a.innerHTML = name
       tdTag.append(a)
       
