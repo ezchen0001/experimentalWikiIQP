@@ -11,7 +11,86 @@
 
 // Vertical alignment (is painful):
 // http://phrogz.net/css/vertical-align/index.html
- 
+  
+function splitCSV(str){
+  str = str.substring(1, str.length-1)
+  var arr
+  if (str.search('","') > -1){
+  	arr = str.split('","')
+  }else{
+  	arr = str.split('"\n"')
+  }
+	return arr
+}
+function arrRangeCallback(str, callback){
+	var id = '1OLx9vr4pR6PtT63MAPaU0qvf5N2WclZ5I1y3ifjkQig';
+  var gid = '0';
+  var url = 'https://docs.google.com/spreadsheets/d/'+id+'/gviz/tq?tqx=out:csv&range='+str+':'+str+'&tq&gid='+gid;
+  xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function () {
+              if (xmlhttp.readyState == 4) {
+                	console.log(xmlhttp.responseText)
+                  callback(splitCSV(xmlhttp.responseText))
+              }
+          };
+          xmlhttp.open("GET", url, true);
+          xmlhttp.send(null);
+}
+function reformatName(gameName){
+	return gameName.toLowerCase().replace(/[^a-z0-9()']/gmi, " ").replace(/\s+/g, "-") 
+}
+  
+var extensions = [".png",".jpg",".jpeg",".webp",".gif"]
+function logMissingLink(path){
+		var errors = document.getElementById("errors") 
+    if( errors.innerHTML == ""){
+    	errors.innerHTML = "The following images could not be found: <br>"
+    } 
+		errors.innerHTML += path + " <br>"
+}
+function testExtensions(img, path, ext){
+  
+		for(var i = 0; i < extensions.length; ++i){
+      if(i == extensions.length - 1){
+        img.onerror = function(){
+        	logMissingLink(path + ".png")
+        }
+      	break 
+      }
+  		if(extensions[i] == ext){
+      	 var newExt = extensions[i+1]
+         img.onerror = function(){
+         		 testExtensions(img, path, newExt)
+         }
+       	 break
+      }
+  	}
+  
+  img.src = path + ext
+}
+function formatCovers () {
+  var coverGallery = document.getElementById("coverGallery")
+  //shallow copy since the .children property updates live
+  var children = [...coverGallery.children];
+  for (var image of children){
+    	image.classList.add("coverItem")
+    	var gameName = image.alt
+      
+    	var a = document.createElement("a")
+      a.classList.add("coverItem")
+      a.href = '/list-of-video-games/'+ reformatName(gameName)
+    	var vertDiv = document.createElement("div")
+      vertDiv.classList.add("vertDiv")
+    	
+    	var tooltip = document.createElement("span")
+      tooltip.classList.add("coverItem")
+      tooltip.innerHTML = image.alt
+    	a.append(vertDiv)
+    	vertDiv.append(image)
+    	a.append(tooltip)
+    	coverGallery.append(a)
+  }
+}
 window.onload = function(){
   //css begins here
   const style = document.createElement("style")
@@ -79,26 +158,17 @@ a.coverItem:hover span.coverItem {
   
 // css ends here
   
-  var coverGallery = document.getElementById("coverGallery")
-  //shallow copy since the .children property updates live
-  var children = [...coverGallery.children];
-  for (var image of children){
-    	image.classList.add("coverItem")
-    	var gameName = image.alt
-      
-    	var a = document.createElement("a")
-      a.classList.add("coverItem")
-      a.href = '/list-of-video-games/'+gameName.replace(/[^a-z0-9()']/gmi, " ").replace(/\s+/g, "-")
-    	var vertDiv = document.createElement("div")
-      vertDiv.classList.add("vertDiv")
-    	
-    	var tooltip = document.createElement("span")
-      tooltip.classList.add("coverItem")
-      tooltip.innerHTML = image.alt
-    	a.append(vertDiv)
-    	vertDiv.append(image)
-    	a.append(tooltip)
-    	coverGallery.append(a)
+  
+  var onGamesGet = function(arr){
+    var div = document.getElementById("coverGallery")
+    for(var i = 3; i < arr.length; ++i){
+    	var img = document.createElement("img")
+      img.alt = arr[i]
+      testExtensions(img, '/game-covers/' + reformatName(arr[i]+" Cover"), ".png")
+      div.append(img)
+    }
+    formatCovers()
   }
+  arrRangeCallback("A",onGamesGet)
   
 }
