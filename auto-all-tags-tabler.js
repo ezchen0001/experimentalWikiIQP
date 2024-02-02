@@ -77,29 +77,31 @@ function createTableElement(){
   var table = document.createElement("table")
   var tbody = document.createElement("tbody")
   table.append(tbody)
-  var tagHeader
-  //First row headers
-  {
-  	let tr = document.createElement("tr") 
-  	let tdTag = document.createElement("td") 
-  	let tdUse = document.createElement("td") 
-    let h1Tag = document.createElement("h1")
-    let h1Use = document.createElement("h1")
-    tagHeader = h1Tag
-    tr.append(tdTag)
-    tdTag.append(h1Tag)
-    tr.append(tdUse)
-    tdUse.append(h1Use)
-    h1Tag.innerHTML = "Tag (Loading...)"
-    h1Use.innerHTML = "Definition"
-    tbody.append(tr)
-  }
+  var loadingDiv = document.createElement("div")
+  loadingDiv.innerHTML = "Loading table..."
+  table.append(loadingDiv)
+  
  	var tagDefinitions = []
   var tagExCount = []
   var tagNames = []
   
   // assume this function is called when above variables are set properly
   var fillEntries = function(){
+    //First row headers
+  {
+  	let tr = document.createElement("tr") 
+  	let tdTag = document.createElement("td") 
+  	let tdUse = document.createElement("td") 
+    let h1Tag = document.createElement("h1")
+    let h1Use = document.createElement("h1")
+    tr.append(tdTag)
+    tdTag.append(h1Tag)
+    tr.append(tdUse)
+    tdUse.append(h1Use)
+    h1Tag.innerHTML = "Tag"
+    h1Use.innerHTML = "Definition"
+    tbody.append(tr)
+  }
     for(var i = 1; i < tagDefinitions.length; i++){
      	var example = tagDefinitions[i]
       var count = tagExCount[i] 
@@ -123,8 +125,8 @@ function createTableElement(){
     }
     //sort table alphabetically
     sortTable(table)
-    // clear loading status
-    tagHeader.innerHTML = "Tag"
+    // end loading
+    loadingDiv.remove()
   }
   
   // 3 stage callback chain to get array data from the tag list
