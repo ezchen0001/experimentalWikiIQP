@@ -117,11 +117,20 @@ function arrRangeCallback(str, callback){
 }
 
 function createTableElement(gameName){
+  var loadingDiv = document.createElement("div")
+  loadingDiv.innerHTML = "Loading table..."
+  
+  
   var table = document.createElement("table")
   var tbody = document.createElement("tbody")
   table.append(tbody)
-  var headerTag
-  //First row headers
+  table.append(loadingDiv)
+  var tagColumn = ""
+ 	var gameDict = []
+  
+  // assume this function is called when above variables are set properly
+  var fillEntries = function(){
+    //First row headers
   {
   	let tr = document.createElement("tr") 
   	let tdGame = document.createElement("td") 
@@ -132,16 +141,11 @@ function createTableElement(gameName){
     tdGame.append(h1Game)
     tr.append(tdUse)
     tdUse.append(h1Use)
-    h1Game.innerHTML = "Game (Loading...)"
+    h1Game.innerHTML = "Game"
     h1Use.innerHTML = "Use In Game"
     tbody.append(tr)
-    headerTag = h1Game
   }
-  var tagColumn = ""
- 	var gameDict = []
-  
-  // assume this function is called when above variables are set properly
-  var fillEntries = function(){
+    
     for(var name in gameDict){
      	var example = gameDict[name]
   		let tr = document.createElement("tr") 
@@ -159,8 +163,8 @@ function createTableElement(gameName){
     }
     //sort table alphabetically
     sortTable(table)
-    //header tag
-    headerTag.innerHTML = "Game"
+    // end loading
+    loadingDiv.remove()
   }
   
   // 2 stage callback chain to get array data from the tag list
